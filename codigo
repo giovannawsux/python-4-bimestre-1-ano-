@@ -1,0 +1,71 @@
+# Disciplina: Introdução a Programação
+# Turma: Informática, 1° ano
+# Componentes: Davi Gonzaga, Débora Alice, Giovanna Maria e Joanny Câmara
+
+biblioteca = []
+
+def menu():
+    print("\n===== Controle de Biblioteca =====")
+    print("1. Adicionar livro")
+    print("2. Listar livros")
+    print("3. Atualizar livro")
+    print("4. Remover livro")
+    print("5. Sair")
+    return input("Escolha uma opção: ")
+
+def adicionar_livro():
+    titulo = input("Título do livro: ")
+    autor = input("Autor: ")
+    ano = input("Ano de publicação: ")
+    livro = {"Título": titulo, "Autor": autor, "Ano": ano}
+    biblioteca.append(livro)
+    print("Livro adicionado com sucesso!")
+
+def listar_livros():
+    if not biblioteca:
+        print("Nenhum livro cadastrado.")
+    else:
+        print("\n===== Lista de Livros =====")
+        for i, livro in enumerate(biblioteca):
+            print(f"{i + 1}. {livro['Título']} - {livro['Autor (a)']} ({livro['Ano']})")
+
+def atualizar_livro():
+    listar_livros()
+    if biblioteca:
+        indice = int(input("Digite o número do livro para atualizar:")) -1
+        if 0 <= indice < len(biblioteca):
+            biblioteca[indice]["Título"] = input("Novo Título: ")
+            biblioteca[indice]["Autor"] = input("Novo Autor: ")
+            biblioteca[indice]["Ano"] = input("Novo ano: ")
+            print("Livro atualizado com sucesso!")
+        else:
+            print("Número inválido. Tente novamente!")
+            
+def remover_livro():
+    listar_livros()
+    if biblioteca:
+        indice = int(input("Digite o número do livro para remover: ")) - 1
+        if 0 <= indice < len(biblioteca):
+            biblioteca.pop(indice)
+            print("Livro removido com sucesso!")
+        else:
+            print("Número inválido.")
+        
+def main():
+    while True:
+        opcao = menu()
+        if opcao == "1":
+            adicionar_livro()
+        elif opcao == "2":
+            listar_livros()
+        elif opcao == "3":
+            atualizar_livro()
+        elif opcao == "4":
+            remover_livro()
+        elif opcao == "5":
+            print("Saindo do sistema...")
+            break
+        else:
+            print("Opção inválida! Tente novamente.")
+
+main()
